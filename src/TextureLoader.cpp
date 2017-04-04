@@ -1,5 +1,6 @@
 #include "TextureLoader.h"
 
+
 TextureLoader::TextureLoader()
 {
     //ctor
@@ -14,7 +15,7 @@ void TextureLoader::Binder()
     glBindTexture(GL_TEXTURE_2D, tex);
 }
 
-void TextureLoader::BindTexture(char *FileName)
+void TextureLoader::BindTexture(const char *FileName)
 {
     glGenTextures(1, &tex);
 

@@ -1,5 +1,5 @@
-#include <Sprite.h>
-#include <TextureLoader.h>
+#include "Sprite.h"
+#include "TextureLoader.h"
 #include <windows.h> // Header File For Windows
 #include <gl/gl.h>
 
@@ -10,10 +10,8 @@
 #include <GL/glut.h>
 #endif
 
-#include <iostream> 		// Header File For The GLu32 Library
+#include <iostream>
 #include <string>
-
-#include <Timer.h>
 
 using namespace std;
 

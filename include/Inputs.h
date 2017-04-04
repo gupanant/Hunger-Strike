@@ -3,9 +3,9 @@
 
 #include <windows.h>
 #include <iostream>
-#include <Model.h>
-#include <Parallax.h>
-#include <Player.h>
+#include "Model.h"
+#include "Parallax.h"
+#include "Player.h"
 
 using namespace std;
 class Inputs

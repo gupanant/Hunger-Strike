@@ -8,10 +8,10 @@
 #pragma comment(lib, "glu32.lib")
 #pragma once
 
-#include <GLScene.h>
+#include "GLScene.h"
 #include <stdlib.h>
 #include <iostream>
-#include <Inputs.h>
+#include "Inputs.h"
 #include <windows.h>		// Header File For Windows
 
 using namespace std;
@@ -386,4 +386,3 @@ int WINAPI WinMain(	HINSTANCE	hInstance,			// Instance
 	KillGLWindow();									// Kill The Window
 	return (msg.wParam);							// Exit The Program
 }
-

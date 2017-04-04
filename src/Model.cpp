@@ -1,5 +1,5 @@
-#include <Model.h>
-#include <TextureLoader.h>
+#include "Model.h"
+#include "TextureLoader.h"
 
 #pragma comment(lib, "opengl32.lib")
 

@@ -10,9 +10,15 @@
 #include <GL/glut.h>
 #endif
 
+
+#include <time.h>
+
 #include <gl/gl.h>			// Header File For The OpenGL32 Library
 #include <gl/glu.h>			// Header File For The GLu32 Library
 #include <iostream>
+#include <vector>
+
+#include "collider.h"
 
 using namespace std;
 class GLScene
@@ -40,6 +46,8 @@ class GLScene
 
         float ScreenHeight;
         float ScreenWidth;
+
+		std::vector< Collider > mColliders;
 
     protected:
 

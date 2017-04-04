@@ -1,6 +1,6 @@
 #ifndef GLLIGHT_H
 #define GLLIGHT_H
-#include<GLScene.h>
+#include"GLScene.h"
 
 class GLLight:public GLScene
 {

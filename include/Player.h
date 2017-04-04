@@ -1,31 +1,61 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
-#include <TextureLoader.h>
-#include <Timer.h>
+#include <sstream>
+
+#include "TextureLoader.h"
+
 
 class Player
 {
-    public:
-        Player();
-        virtual ~Player();
+public:
+	enum States
+	{
+		Standing,
+		Running,
+		Jumping,
+		Falling
+	};
 
-        float Player_size[3]={1.0,1.0,1.0};
-        float Player_x;
-        float Player_y;
-        float Vertices[4][3] ={ {0.0, 0.0, -1.5},{1.0, 0.0, -1.5},{1.0, 1.0, -1.5},{0.0, 1.0, -1.5}};
+	enum Direction
+	{
+		None,
+		Left,
+		Right
+	};
 
-        int runSpeed;
-        int jumpSpeed;
-        int actionTrigger;
+	Player();
+	virtual ~Player();
 
-        void drawPlayer();
-        void playerInit();
-        void Action(int);
+	void playerInit();
 
-    protected:
+	void StartMove( Direction d );
+	void Jump();
+	void Stop();
 
-    private:
+	void Render();
+	void Update();
+
+
+	float mX;
+	float mY;
+
+
+protected:
+
+private:
+	void drawPlayer();
+
+
+	float Player_size[3] = { 1.0,1.0,1.0 };
+	float Vertices[4][3] = { { 0.0, 0.0, -1.5 },{ 1.0, 0.0, -1.5 },{ 1.0, 1.0, -1.5 },{ 0.0, 1.0, -1.5 } };
+
+	int mRunFrame;
+	int mJumpFrame;
+	int mFallFrame;
+
+	int mState;
+	int mDirection;
 };
 
 #endif // PLAYER_H

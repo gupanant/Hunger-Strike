@@ -1,151 +1,122 @@
-#include <Inputs.h>
+#include "Inputs.h"
+
 
 Inputs::Inputs()
 {
-        Mouse_Translate = false;
-        Mouse_Roatate = false;
+	Mouse_Translate = false;
+	Mouse_Roatate = false;
 }
 
 Inputs::~Inputs()
 {
-    //dtor
+	//dtor
 }
 
-void Inputs::KeyEnv(Parallax *Bk1,float speed)
+void Inputs::KeyEnv( Parallax *Bk1, float speed )
 {
-    switch (wParam)
-            {
-                case VK_LEFT:
+	switch( wParam )
+	{
+	case VK_LEFT:
 
-                     Bk1->Xmin -= speed;
-                     Bk1->Xmax -= speed;
-                     // Process the LEFT ARROW key.
-                    break;
 
-                case VK_RIGHT:
-                     Bk1->Xmin += speed;
-                     Bk1->Xmax += speed;
-                    // Process the RIGHT ARROW key.
-                    break;
+	// Process the LEFT ARROW key.
+	break;
 
-                case VK_UP:
-                 //    Bk1->Ymin += speed;
-                 //    Bk1->Ymax += speed;
-                    // Process the UP ARROW key.
-                    break;
+	case VK_RIGHT:
+	// Process the RIGHT ARROW key.
+	break;
 
-                case VK_DOWN:
-                  //   Bk1->Ymin -= speed;
-                  //   Bk1->Ymax -= speed;
-                    // Process the DOWN ARROW key.
-                    break;
-            }
+	case VK_UP:
+	//    Bk1->Ymin += speed;
+	//    Bk1->Ymax += speed;
+	   // Process the UP ARROW key.
+	break;
+
+	case VK_DOWN:
+	//   Bk1->Ymin -= speed;
+	//   Bk1->Ymax -= speed;
+	  // Process the DOWN ARROW key.
+	break;
+	}
 }
 
-void Inputs::KeyPressed(Player *Player)
+void Inputs::KeyPressed( Player *player )
 {
-  switch (wParam)
-            {
-                case VK_LEFT:
-                     Player->actionTrigger =0;
-                    // Model->RotateY += 1.0;
-                     // Process the LEFT ARROW key.
-                    break;
+	switch( wParam )
+	{
+	case VK_LEFT:
+	player->StartMove( Player::Left );
+	break;
 
-                case VK_RIGHT:
-                     Player->actionTrigger =1;
-                    // Model->RotateY -= 1.0;
-                    // Process the RIGHT ARROW key.
-                    break;
+	case VK_RIGHT:
+	player->StartMove( Player::Right );
+	break;
 
-                case VK_UP:
-
-                    Player->actionTrigger =2;
-                    // Model->RotateX -= 1.0;
-                    // Process the UP ARROW key.
-                    break;
-
-                case VK_DOWN:
-                    // Model->RotateX += 1.0;
-                    // Process the DOWN ARROW key.
-                    break;
-
-                case VK_HOME:
-                    // Model->Zoom -= 1.0;
-                    // Process the RIGHT ARROW key.
-                    break;
-
-                case VK_END:
-                    // Model->Zoom += 1.0;
-                    // Process the RIGHT ARROW key.
-                    break;
-            }
+	case VK_UP:
+	player->Jump();
+	break;
+	}
 }
 
 
-void Inputs::KeyUp(Player *Player)
+void Inputs::KeyUp( Player *player )
 {
-    Player->actionTrigger =0;
-
-    switch (wParam)
-            {
-                default:
-                break;
-            }
+	if( wParam == VK_LEFT || wParam == VK_RIGHT )
+		player->Stop();
 }
 
-void Inputs::MouseEventDown(Model *Model, double x,double y)
+void Inputs::MouseEventDown( Model *Model, double x, double y )
 {
-        prev_Mouse_X =x;
-        prev_Mouse_Y =y;
+	prev_Mouse_X = x;
+	prev_Mouse_Y = y;
 
-   switch (wParam)
-            {
-                case MK_LBUTTON:
-                        Mouse_Roatate = true;
-                    break;
+	switch( wParam )
+	{
+	case MK_LBUTTON:
+	Mouse_Roatate = true;
+	break;
 
-                case MK_RBUTTON:
-                     Mouse_Translate =true;
-                    break;
-                case MK_MBUTTON:
+	case MK_RBUTTON:
+	Mouse_Translate = true;
+	break;
+	case MK_MBUTTON:
 
-                    break;
+	break;
 
-                default:
-                    break;
-            }
+	default:
+	break;
+	}
 }
 
- void Inputs::MouseEventUp()
- {
-    Mouse_Translate =false;
-    Mouse_Roatate =false;
- }
-
-void Inputs::MouseWheel(Model *Model,double Delta)
+void Inputs::MouseEventUp()
 {
-    Model->Zoom += Delta/100;
+	Mouse_Translate = false;
+	Mouse_Roatate = false;
 }
 
-void Inputs::MouseMove(Model *Model,double x,double y)
+void Inputs::MouseWheel( Model *Model, double Delta )
 {
-      if(Mouse_Translate)
-      {
-       Model->TranslateX += (x-prev_Mouse_X)/100;
-       Model->TranslateY += (y-prev_Mouse_Y)/100;
+	Model->Zoom += Delta / 100;
+}
 
-       prev_Mouse_X =x;
-       prev_Mouse_Y =y;
-      }
+void Inputs::MouseMove( Model *Model, double x, double y )
+{
+	if( Mouse_Translate )
+	{
+		Model->TranslateX += ( x - prev_Mouse_X ) / 100;
+		Model->TranslateY += ( y - prev_Mouse_Y ) / 100;
 
-      if(Mouse_Roatate)
-      {
-        Model->RotateY += (x-prev_Mouse_X)/3;
-        Model->RotateX += (y-prev_Mouse_Y)/3;
+		prev_Mouse_X = x;
+		prev_Mouse_Y = y;
+	}
 
-        prev_Mouse_X =x;
-        prev_Mouse_Y =y;
-      }
+	if( Mouse_Roatate )
+	{
+		Model->RotateY += ( x - prev_Mouse_X ) / 3;
+		Model->RotateX += ( y - prev_Mouse_Y ) / 3;
+
+		prev_Mouse_X = x;
+		prev_Mouse_Y = y;
+	}
 }
 
