@@ -1,0 +1,109 @@
+# depslib dependency file v1.0
+1481101918 source:c:\users\dhany\desktop\geengine_v01\lesson09_player\main.cpp
+	<windows.h>
+	<GLScene.h>
+	<stdlib.h>
+	<iostream>
+	<Inputs.h>
+	<windows.h>
+
+1489444743 c:\users\dhany\desktop\geengine_v01\lesson09_player\include\glscene.h
+	<windows.h>
+	<string.h>
+	<GLUT/glut.h>
+	<GL/glut.h>
+	<gl/gl.h>
+	<gl/glu.h>
+	<iostream>
+
+1489447129 c:\users\dhany\desktop\geengine_v01\common\inc\gl\glut.h
+	<windows.h>
+	<stdlib.h>
+	<GL/gl.h>
+	<GL/glu.h>
+
+1489637738 c:\users\dhany\desktop\geengine_v01\lesson09_player\include\inputs.h
+	<windows.h>
+	<iostream>
+	<Model.h>
+	<Parallax.h>
+	<Player.h>
+
+1488960665 c:\users\dhany\desktop\geengine_v01\lesson09_player\include\model.h
+	<windows.h>
+	<string.h>
+	<GLUT/glut.h>
+	<GL/glut.h>
+	<gl/gl.h>
+	<gl/glu.h>
+	<GL/glut.h>
+	<iostream>
+
+1489623674 c:\users\dhany\desktop\geengine_v01\lesson09_player\include\parallax.h
+	<gl/gl.h>
+	<windows.h>
+	<string.h>
+	<iostream>
+
+1489630981 c:\users\dhany\desktop\geengine_v01\lesson09_player\include\sprite.h
+
+1478261846 source:c:\users\dhany\desktop\geengine_v01\lesson09_player\src\gllight.cpp
+	"GLLight.h"
+
+1478386858 c:\users\dhany\desktop\geengine_v01\lesson09_player\include\gllight.h
+	<GLScene.h>
+
+1489638090 source:c:\users\dhany\desktop\geengine_v01\lesson09_player\src\glscene.cpp
+	<GLScene.h>
+	<GLLight.h>
+	<Inputs.h>
+	<Model.h>
+	<Parallax.h>
+	<Sprite.h>
+	<Player.h>
+
+1490059112 source:c:\users\dhany\desktop\geengine_v01\lesson09_player\src\inputs.cpp
+	<Inputs.h>
+
+1489623869 source:c:\users\dhany\desktop\geengine_v01\lesson09_player\src\model.cpp
+	<Model.h>
+	<TextureLoader.h>
+
+1489026091 c:\users\dhany\desktop\geengine_v01\lesson09_player\include\textureloader.h
+	<SOIL.h>
+	<gl/gl.h>
+
+1215483208 c:\users\dhany\desktop\geengine_v01\common\inc\soil.h
+
+1488960665 source:c:\users\dhany\desktop\geengine_v01\lesson09_player\src\parallax.cpp
+	<Parallax.h>
+	<TextureLoader.h>
+
+1490051131 source:c:\users\dhany\desktop\geengine_v01\lesson09_player\src\sprite.cpp
+	<Sprite.h>
+	<TextureLoader.h>
+	<windows.h>
+	<gl/gl.h>
+	<string>
+	<GLUT/glut.h>
+	<GL/glut.h>
+	<iostream>
+	<string>
+	<Timer.h>
+
+1489433998 c:\users\dhany\desktop\geengine_v01\lesson09_player\include\timer.h
+	<time.h>
+
+1489026091 source:c:\users\dhany\desktop\geengine_v01\lesson09_player\src\textureloader.cpp
+	"TextureLoader.h"
+
+1489464821 source:c:\users\dhany\desktop\geengine_v01\lesson09_player\src\timer.cpp
+	"Timer.h"
+
+1490065315 source:c:\users\dhany\desktop\geengine_v01\lesson09_player\src\player.cpp
+	"Player.h"
+
+1489635429 c:\users\dhany\desktop\geengine_v01\lesson09_player\include\player.h
+	<TextureLoader.h>
+	<Timer.h>
+
