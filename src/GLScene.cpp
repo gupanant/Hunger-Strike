@@ -1,4 +1,3 @@
-
 #include "GLScene.h"
 #include "GLLight.h"
 #include "Inputs.h"
@@ -6,7 +5,8 @@
 #include "Parallax.h"
 #include "Sprite.h"
 #include "Player.h"
-
+#include <string>
+#include <sstream>
 
 Inputs *KbMs = new Inputs();
 Model *Mdl = new Model();
@@ -17,7 +17,6 @@ Player *ply = new Player();
 TextureLoader MangoTex;
 TextureLoader BombTex;
 int scorecount=0;
-
 void makedelay( int a )
 {
 	glutTimerFunc( 400, makedelay, 0 );
@@ -29,7 +28,27 @@ float Random()
 	return (float)rand() / (float)RAND_MAX;
 }
 
-
+/*Anant TesT */
+void drawText(const char *text, int length, int x, int y){
+ glMatrixMode(GL_PROJECTION); // change the current matrix to PROJECTION
+ double matrix[16]; // 16 doubles in stack memory
+ glGetDoublev(GL_PROJECTION_MATRIX, matrix); // get the values from PROJECTION matrix to local variable
+ glLoadIdentity(); // reset PROJECTION matrix to identity matrix
+ glOrtho(0, 800, 0, 600, -5, 5); // orthographic perspective
+ glMatrixMode(GL_MODELVIEW); // change current matrix to MODELVIEW matrix again
+ glLoadIdentity(); // reset it to identity matrix
+ glPushMatrix(); // push current state of MODELVIEW matrix to stack
+ glLoadIdentity(); // reset it again. (may not be required, but it my convention)
+ glRasterPos2i(x, y); // raster position in 2D
+ for(int i=0; i<length; i++){
+  glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, (int)text[i]); // generation of characters in our text with 9 by 15 GLU font
+ }
+ glPopMatrix(); // get MODELVIEW matrix value from stack
+ glMatrixMode(GL_PROJECTION); // change current matrix mode to PROJECTION
+ glLoadMatrixd(matrix); // reset
+ glMatrixMode(GL_MODELVIEW); // change current matrix mode to MODELVIEW
+}
+//Anant Test ends
 
 GLScene::GLScene()
 {
@@ -160,9 +179,7 @@ GLint GLScene::InitGL()									// All Setup For OpenGL Goes Here
 GLint GLScene::DrawGLScene()							// Here's Where We Do All The Drawing
 {
 	glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );	// Clear Screen And Depth Buffer
-	glLoadIdentity();									// Reset The Current Modelview Matrix
-
-
+	glLoadIdentity();	// Reset The Current Modelview Matrix
 	// From player.cpp loop on updating step
 	static int ticks = 0;
 	static int lastclock = clock();
@@ -198,6 +215,23 @@ GLint GLScene::DrawGLScene()							// Here's Where We Do All The Drawing
 	Prlx->DrawSquare( ScreenWidth, ScreenHeight );
 	glPopMatrix();
 
+
+	//Updating Score
+
+ gluLookAt(0,0,-10, 0,0, 3, 0, 1, 0);
+ glBegin(GL_LINES);
+ glVertex3f(0,0,0);
+ glVertex3f(1,0,0);
+ glEnd();
+
+ std::string text;
+ text = "Your Score : ";
+ std::stringstream ss;
+ss << scorecount;
+std::string pika = text + ss.str();
+ drawText(pika.data(), pika.size(), 10, 580);
+
+	//Updating Score ends
 	glMatrixMode( GL_MODELVIEW_MATRIX );
 	glPushMatrix();
 	glTranslatef( -ply->mX, 0.0f, 0.0f );
@@ -219,6 +253,8 @@ GLint GLScene::DrawGLScene()							// Here's Where We Do All The Drawing
 			{
 
 				//Need to see how to create new scene or screen here stating game over.
+				//glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);	// Clean the screen and the depth buffer
+                //glLoadIdentity();
 				exit = true;
 			}
 			// remove mango after collision

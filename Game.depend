@@ -540,3 +540,115 @@
 1491273686 source:c:\users\anant\desktop\291t\midterm3\src\timer.cpp
 	"Timer.h"
 
+1491273884 source:c:\users\anant\desktop\291t\midterm4\main.cpp
+	<windows.h>
+	"GLScene.h"
+	<stdlib.h>
+	<iostream>
+	"Inputs.h"
+	<windows.h>
+
+1491274019 c:\users\anant\desktop\291t\midterm4\include\glscene.h
+	<windows.h>
+	<string.h>
+	<GLUT/glut.h>
+	<GL/glut.h>
+	<time.h>
+	<gl/gl.h>
+	<gl/glu.h>
+	<iostream>
+	<vector>
+	"collider.h"
+
+1491273684 c:\users\anant\desktop\291t\midterm4\include\collider.h
+	<string>
+	"TextureLoader.h"
+
+1491278798 c:\users\anant\desktop\291t\midterm4\include\textureloader.h
+	<Windows.h>
+	<SOIL.h>
+	<gl/gl.h>
+
+1491273685 c:\users\anant\desktop\291t\midterm4\include\inputs.h
+	<windows.h>
+	<iostream>
+	"Model.h"
+	"Parallax.h"
+	"Player.h"
+
+1491274028 c:\users\anant\desktop\291t\midterm4\include\model.h
+	<windows.h>
+	<string.h>
+	<GLUT/glut.h>
+	<GL/glut.h>
+	<gl/gl.h>
+	<gl/glu.h>
+	<iostream>
+
+1491273686 c:\users\anant\desktop\291t\midterm4\include\parallax.h
+	<windows.h>
+	<gl/gl.h>
+	<string.h>
+	<iostream>
+
+1491273686 c:\users\anant\desktop\291t\midterm4\include\player.h
+	<sstream>
+	"TextureLoader.h"
+
+1491274244 source:c:\users\anant\desktop\291t\midterm4\src\collider.cpp
+	"collider.h"
+
+1491273684 source:c:\users\anant\desktop\291t\midterm4\src\gllight.cpp
+	"GLLight.h"
+
+1491273685 c:\users\anant\desktop\291t\midterm4\include\gllight.h
+	"GLScene.h"
+
+1491276944 source:c:\users\anant\desktop\291t\midterm4\src\inputs.cpp
+	"Inputs.h"
+
+1491273686 source:c:\users\anant\desktop\291t\midterm4\src\model.cpp
+	"Model.h"
+	"TextureLoader.h"
+
+1491273686 source:c:\users\anant\desktop\291t\midterm4\src\parallax.cpp
+	"Parallax.h"
+	"TextureLoader.h"
+
+1491279225 source:c:\users\anant\desktop\291t\midterm4\src\player.cpp
+	"Player.h"
+	"Timer.h"
+	<windows.h>
+	<mmsystem.h>
+
+1491273686 c:\users\anant\desktop\291t\midterm4\include\timer.h
+	<time.h>
+
+1491274038 source:c:\users\anant\desktop\291t\midterm4\src\sprite.cpp
+	"Sprite.h"
+	"TextureLoader.h"
+	<windows.h>
+	<gl/gl.h>
+	<string>
+	<GLUT/glut.h>
+	<GL/glut.h>
+	<iostream>
+	<string>
+
+1491273686 c:\users\anant\desktop\291t\midterm4\include\sprite.h
+
+1491278793 source:c:\users\anant\desktop\291t\midterm4\src\textureloader.cpp
+	"TextureLoader.h"
+
+1491273686 source:c:\users\anant\desktop\291t\midterm4\src\timer.cpp
+	"Timer.h"
+
+1491285065 source:c:\users\anant\desktop\291t\midterm4\src\glscene.cpp
+	"GLScene.h"
+	"GLLight.h"
+	"Inputs.h"
+	"Model.h"
+	"Parallax.h"
+	"Sprite.h"
+	"Player.h"
+
