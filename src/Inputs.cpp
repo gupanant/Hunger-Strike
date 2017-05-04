@@ -1,5 +1,5 @@
 #include "Inputs.h"
-
+int startflag=1;
 
 Inputs::Inputs()
 {
@@ -55,6 +55,11 @@ void Inputs::KeyPressed( Player *player )
 	case VK_UP:
 	player->Jump();
 	break;
+
+	case VK_RETURN:
+    startflag=0;
+    break;
+
 	}
 }
 

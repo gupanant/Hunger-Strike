@@ -42,6 +42,7 @@
 			<Add library="gdi32" />
 			<Add library="../Common/lib/glut32.lib" />
 			<Add library="winmm" />
+			<Add library="../Common/lib/libirrKlang.a" />
 		</Linker>
 		<Unit filename="include/GLLight.h" />
 		<Unit filename="include/GLScene.h" />
@@ -53,6 +54,8 @@
 		<Unit filename="include/TextureLoader.h" />
 		<Unit filename="include/Timer.h" />
 		<Unit filename="include/collider.h" />
+		<Unit filename="include/particle.h" />
+		<Unit filename="include/sound.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="src/GLLight.cpp" />
 		<Unit filename="src/GLScene.cpp" />
@@ -64,6 +67,8 @@
 		<Unit filename="src/TextureLoader.cpp" />
 		<Unit filename="src/Timer.cpp" />
 		<Unit filename="src/collider.cpp" />
+		<Unit filename="src/particle.cpp" />
+		<Unit filename="src/sound.cpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />

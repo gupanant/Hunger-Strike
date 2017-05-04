@@ -12,7 +12,7 @@ Collider::Collider( float x, float y, float radius, float speed, TextureLoader* 
 void Collider::Render()
 {
 	glPushMatrix();
-	mTex->Binder();
+	mTex->Bind();
 
 	// Center and scale according to radius.
 	glTranslatef( mX - mR * 0.5f, mY - mR * 0.5f, -2.0f );

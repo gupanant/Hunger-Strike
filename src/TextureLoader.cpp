@@ -3,21 +3,20 @@
 
 TextureLoader::TextureLoader()
 {
-    //ctor
 }
 
 TextureLoader::~TextureLoader()
 {
     //dtor
 }
-void TextureLoader::Binder()
+void TextureLoader::Bind()
 {
     glBindTexture(GL_TEXTURE_2D, tex);
 }
 
 void TextureLoader::BindTexture(const char *FileName)
 {
-    glGenTextures(1, &tex);
+	glGenTextures( 1, &tex );
 
     glTexEnvi(GL_TEXTURE_ENV,GL_TEXTURE_ENV_MODE,GL_MODULATE);
 

@@ -5,6 +5,8 @@
 #include <gl/gl.h>			// Header File For The OpenGL32 Library
 #include <string.h>
 #include <iostream>
+
+#include "TextureLoader.h"
 using namespace std;
 
 
@@ -14,7 +16,7 @@ class Parallax
         Parallax();
         virtual ~Parallax();
         void DrawSquare(float, float);//Square wall
-        void PrlxInit(char *);              //Initialize texture bind etc.
+        void Init(char *);              //Initialize texture bind etc.
         void scroll(bool,string,float);      //automatic scrolling, direction
        
 		float mX;
@@ -24,6 +26,8 @@ class Parallax
     protected:
 
     private:
+
+		TextureLoader mTexture;
 };
 
 #endif // PARALLAX_H

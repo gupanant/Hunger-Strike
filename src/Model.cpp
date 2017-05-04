@@ -22,13 +22,13 @@ Model::~Model()
 
 void Model::ModelInit(char *fileName)
 {
-    tex->Binder();
+    tex->Bind();
     tex->BindTexture(fileName);
 }
 
 void Model::DrawModel()
 {
-    tex->Binder();
+    tex->Bind();
     glTranslated(TranslateX,-TranslateY,Zoom);
     glRotated(RotateX,1,0,0);
     glRotated(RotateY,0,1,0);

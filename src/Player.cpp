@@ -41,8 +41,6 @@ void Player::playerInit()
 
 	mState = Standing;
 	mDirection = None;
-	mRunFrame = 0;
-	mJumpFrame = 0;
 
 	glEnable( GL_BLEND );
 	glBlendFunc( GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA );
@@ -104,7 +102,7 @@ void Player::Render()
 	{
 
 	case Standing:
-		stndTtex[0].Binder();
+		stndTtex[0].Bind();
 		break;
 
 	case Running:
@@ -115,7 +113,7 @@ void Player::Render()
 		}
 		mRunFrame = mRunFrame % NUMRUNFRAMES;
 
-		runTtex[mRunFrame].Binder();
+		runTtex[mRunFrame].Bind();
 
 		break;
 
@@ -124,7 +122,7 @@ void Player::Render()
 	{
 		float jumpstate = ( mY - GroundHeight ) / ( JumpHeight );
 		mJumpFrame = (int)( jumpstate * (float)NUMJUMPFRAMES ) % (NUMJUMPFRAMES + 1);
-		jumpTtex[mJumpFrame].Binder();
+		jumpTtex[mJumpFrame].Bind();
 		break;
 	}
 	case Falling:
@@ -135,7 +133,7 @@ void Player::Render()
 			T->Reset();
 		}
 		if( mFallFrame >= NUMFALLFRAMES ) mFallFrame = NUMFALLFRAMES - 1;
-		fallTtex[mFallFrame].Binder();
+		fallTtex[mFallFrame].Bind();
 		break;
 	}
 	}

@@ -21,7 +21,7 @@ class Inputs
         void MouseEventUp();
         void MouseWheel(Model *,double);
         void MouseMove(Model *,double ,double );
-
+        int startFlag;
         double prev_Mouse_X;
         double prev_Mouse_Y;
         bool Mouse_Translate;

@@ -20,38 +20,64 @@
 
 #include "collider.h"
 
+enum States
+{
+	STATE_INGAME,
+	STATE_TITLE,
+	STATE_MENU,
+	STATE_HELP,
+	STATE_GAMEOVER,
+	STATE_EXIT
+};
 using namespace std;
 class GLScene
 {
 
-    public:
-        GLScene();
-        virtual ~GLScene();
-        GLvoid ReSizeGLScene(GLsizei width, GLsizei height);
-        GLint InitGL();
-        GLint DrawGLScene();
+public:
+	GLScene();
+	virtual ~GLScene();
+	GLvoid ReSizeGLScene( GLsizei width, GLsizei height );
+	GLint InitGL();
+	GLint DrawGLScene();
 
-       int  WindowMsg(  HWND,		// Handle For This Window
-                        UINT,		// Message For This Window
-						WPARAM,		// Additional Message Information
-						LPARAM);
+	int  WindowMsg( HWND,		// Handle For This Window
+		UINT,		// Message For This Window
+		WPARAM,		// Additional Message Information
+		LPARAM );
 
+	int mState;
 
-        double RotateX;
-        double RotateY;
-        double RotateZ;
-        double Zoom;
-        double TranslateX;
-        double TranslateY;
+	bool mRunning;
 
-        float ScreenHeight;
-        float ScreenWidth;
+	double RotateX;
+	double RotateY;
+	double RotateZ;
+	double Zoom;
+	double TranslateX;
+	double TranslateY;
 
-		std::vector< Collider > mColliders;
+	float ScreenHeight;
+	float ScreenWidth;
 
-    protected:
+	std::vector< Collider > mColliders;
 
-    private:
+protected:
+
+private:
+
+	int mScore;
+	int mLifes;
+
+	void ResetGameState();
+
+	void DrawIngame();
+	void DrawTitleScreen();
+	void DrawMenuScreen();
+	void DrawHelpScreen();
+	void DrawGameOverScreen();
+	void DrawExitScreen();
+
+	void OnKeyUp( WPARAM vkkey );
 
 };
 

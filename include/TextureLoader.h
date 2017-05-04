@@ -12,7 +12,7 @@ class TextureLoader
         TextureLoader();
         virtual ~TextureLoader();
         void BindTexture(const char *);
-        void Binder();
+        void Bind();
         unsigned char* image;
         int width, height;
         GLuint tex;
