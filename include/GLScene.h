@@ -17,8 +17,16 @@
 #include <gl/glu.h>			// Header File For The GLu32 Library
 #include <iostream>
 #include <vector>
+#include <fstream>
+#include <algorithm>
+#include <sstream>
+#include <string>
+#include <iomanip>
 
 #include "collider.h"
+#include "particle.h"
+
+#define HIGHSCOREFILE "highscores"
 
 enum States
 {
@@ -27,7 +35,9 @@ enum States
 	STATE_MENU,
 	STATE_HELP,
 	STATE_GAMEOVER,
-	STATE_EXIT
+	STATE_EXIT,
+	STATE_ASKNAME,
+	STATE_HIGHSCORE
 };
 using namespace std;
 class GLScene
@@ -46,6 +56,7 @@ public:
 		LPARAM );
 
 	int mState;
+	std::string mName;
 
 	bool mRunning;
 
@@ -60,15 +71,34 @@ public:
 	float ScreenWidth;
 
 	std::vector< Collider > mColliders;
+	std::vector< Collider > mBullets;
+
+	struct Score
+	{
+		std::string name;
+		int score;
+	};
+	std::vector< Score > mHighScores;
 
 protected:
+
+	void SaveHighScores( std::string filename );
+	void LoadHighScores( std::string filename );
+	void AddHighScore( Score s );
 
 private:
 
 	int mScore;
 	int mLifes;
+	int mTime;
+
+	float mLastx;
+
+	ParticleSystem mPS;
 
 	void ResetGameState();
+
+	void Shoot();
 
 	void DrawIngame();
 	void DrawTitleScreen();
@@ -76,6 +106,8 @@ private:
 	void DrawHelpScreen();
 	void DrawGameOverScreen();
 	void DrawExitScreen();
+	void DrawAskNameScreen();
+	void DrawHighScoreScreen();
 
 	void OnKeyUp( WPARAM vkkey );
 

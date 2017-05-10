@@ -16,11 +16,13 @@ public:
 
 	TextureLoader* mTex;
 
-private:
 	float mX;
 	float mY;
 	float mR;
 	float mSpeed;
+
+private:
+
 
 };
 

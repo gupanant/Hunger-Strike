@@ -11,6 +11,7 @@ TextureLoader::~TextureLoader()
 }
 void TextureLoader::Bind()
 {
+	glEnable( GL_TEXTURE_2D );
     glBindTexture(GL_TEXTURE_2D, tex);
 }
 

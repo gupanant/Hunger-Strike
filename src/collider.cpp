@@ -14,34 +14,24 @@ void Collider::Render()
 	glPushMatrix();
 	mTex->Bind();
 
+	float width = mTex->width * mR;
+	float height = mTex->height * mR;
+
 	// Center and scale according to radius.
-	glTranslatef( mX - mR * 0.5f, mY - mR * 0.5f, -2.0f );
-	glScaled( mR, mR, 1.0f );
+	glTranslatef( mX - width * 0.5f, mY - height * 0.5f, -2.0f );
 
 	glBegin( GL_QUADS );
 	glTexCoord2f( 0.0f, 1.0f );
 	glVertex3f( 0.0f, 0.0f, -1.5f );
 	glTexCoord2f( 1.0f, 1.0f );
-	glVertex3f( 1.0f, 0.0f, -1.5f );
+	glVertex3f( width, 0.0f, -1.5f );
 	glTexCoord2f( 1.0f, 0.0f );
-	glVertex3f( 1.0f, 1.0f, -1.5f );
+	glVertex3f( width, height, -1.5f );
 	glTexCoord2f( 0.0f, 0.0f );
-	glVertex3f( 0.0f, 1.0f, -1.5f );
+	glVertex3f( 0.0f, height, -1.5f );
 	glEnd();
 
 	glPopMatrix();
-
-}
-
-bool Collider::Collides( float x, float y, float r )
-{
-	float dx = mX - x;
-	float dy = mY - y;
-	/* pikachu testing the collision */
-	float distance2 = dx * dx + dy * dy;
-	float radius2 = mR * mR + r * r;
-    //cout<<"distance"<<distance2<<"tessssss"<<radius2;
-	return distance2 < radius2;
 
 }
 

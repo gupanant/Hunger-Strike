@@ -14,7 +14,9 @@ public:
 		Standing,
 		Running,
 		Jumping,
-		Falling
+		Falling,
+		Sliding,
+		Dying
 	};
 
 	enum Direction
@@ -24,22 +26,36 @@ public:
 		Right
 	};
 
-	Player();
+	Player( float height = 1 );
 	virtual ~Player();
 
-	void playerInit();
+	void Init();
 
 	void StartMove( Direction d );
 	void Jump();
 	void Stop();
+	void Slide();
+	void StopSliding();
+	void Die();
 
 	void Render();
-	void Update();
+	void Update( float dt, float screenheight );
 
 
 	float mX;
 	float mY;
+	float mSize;
 
+	float mGroundHeight;
+	float mJumpHeight;
+
+	TextureLoader* mCurrentTex;
+
+	bool IsDead() { return mDead; }
+	bool IsDying() { return mState == Dying; }
+
+
+	void Reset();
 
 protected:
 
@@ -47,12 +63,12 @@ private:
 	void drawPlayer();
 
 
-	float Player_size[3] = { 1.0,1.0,1.0 };
-	float Vertices[4][3] = { { 0.0, 0.0, -1.5 },{ 1.0, 0.0, -1.5 },{ 1.0, 1.0, -1.5 },{ 0.0, 1.0, -1.5 } };
-
 	int mRunFrame;
 	int mJumpFrame;
 	int mFallFrame;
+	int mDieFrame;
+
+	bool mDead;
 
 	int mState;
 	int mDirection;

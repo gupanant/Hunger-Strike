@@ -67,13 +67,13 @@ void Parallax::DrawSquare( float width, float height )
 	mTexture.Bind();
 	glBegin( GL_POLYGON );
 	glTexCoord2f( Xmin, Ymin );
-	glVertex3f( -2 * width / height, -2, -4.f );  // Bottom Left Of The Texture and Quad
+	glVertex3f( 0, 0, 1.0f );  // Bottom Left Of The Texture and Quad
 	glTexCoord2f( Xmax, Ymin );
-	glVertex3f( 2 * width / height, -2, -4.f );  // Bottom Right Of The Texture and Quad
+	glVertex3f( width, 0, 1.0f );  // Bottom Right Of The Texture and Quad
 	glTexCoord2f( Xmax, Ymax );
-	glVertex3f( 2 * width / height, 2, -4.f );  // Top Right Of The Texture and Quad
+	glVertex3f( width, height, 1.0f );  // Top Right Of The Texture and Quad
 	glTexCoord2f( Xmin, Ymax );
-	glVertex3f( -2 * width / height, 2, -4.f );  // Top Left Of The Texture and Quad
+	glVertex3f( 0, height, 1.0f );  // Top Left Of The Texture and Quad
 	glEnd();
 
 }

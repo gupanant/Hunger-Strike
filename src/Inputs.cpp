@@ -56,6 +56,10 @@ void Inputs::KeyPressed( Player *player )
 	player->Jump();
 	break;
 
+	case VK_DOWN:
+	player->Slide();
+	break;
+
 	case VK_RETURN:
     startflag=0;
     break;
@@ -68,6 +72,9 @@ void Inputs::KeyUp( Player *player )
 {
 	if( wParam == VK_LEFT || wParam == VK_RIGHT )
 		player->Stop();
+
+	if( wParam == VK_DOWN )
+		player->StopSliding();
 }
 
 void Inputs::MouseEventDown( Model *Model, double x, double y )

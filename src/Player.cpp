@@ -6,25 +6,26 @@
 Timer *T = new Timer();
 float t = 0;
 
-#define NUMRUNFRAMES 23
-#define NUMSTANDFRAMES 1
-#define NUMJUMPFRAMES 8
-#define NUMFALLFRAMES 6
+#define NUMRUNFRAMES 10
+#define NUMSTANDFRAMES 10
+#define NUMJUMPFRAMES 10
+#define NUMFALLFRAMES 5
+#define NUMSLIDEFRAMES 10
+#define NUMDEADFRAMES 10
 
-TextureLoader runTtex[NUMRUNFRAMES];
-TextureLoader stndTtex[NUMSTANDFRAMES];
-TextureLoader jumpTtex[NUMJUMPFRAMES];
-TextureLoader fallTtex[NUMFALLFRAMES];
+TextureLoader RunTex[NUMRUNFRAMES];
+TextureLoader StandTex[NUMSTANDFRAMES];
+TextureLoader JumpTex[NUMJUMPFRAMES];
+TextureLoader FallTex[NUMFALLFRAMES];
+TextureLoader DeadTex[NUMDEADFRAMES];
+TextureLoader SlideTex[NUMSLIDEFRAMES];
 
 
 
-Player::Player()
+Player::Player(float size)
 {
-	//ctor
-	mRunFrame = 0;
-	mJumpFrame = 0;
-	mFallFrame = 0;
-
+	mSize = size;
+	Reset();
 }
 
 Player::~Player()
@@ -32,9 +33,13 @@ Player::~Player()
 	//dtor
 }
 
-void Player::playerInit()
+void Player::Reset()
 {
-	T->Start();
+	mRunFrame = 0;
+	mJumpFrame = 0;
+	mFallFrame = 0;
+	mDieFrame = 0;
+	mDead = false;
 
 	mX = 0.0;
 	mY = 0.0;
@@ -42,55 +47,87 @@ void Player::playerInit()
 	mState = Standing;
 	mDirection = None;
 
+
+}
+
+void Player::Init()
+{
+	T->Start();
+
 	glEnable( GL_BLEND );
 	glBlendFunc( GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA );
 
-	stndTtex[0].BindTexture( "images/player/playeridle0.png" );
+	for( int i = 0; i < NUMSTANDFRAMES; ++i )
+	{
+		std::stringstream ss;
+		ss << "images/templerun/idle" << i << ".png";
+
+		StandTex[i].BindTexture( ss.str().c_str() );
+	}
+
+	mCurrentTex = &StandTex[0];
+
+	for( int i = 0; i < NUMDEADFRAMES; ++i )
+	{
+		std::stringstream ss;
+		ss << "images/templerun/dead" << i << ".png";
+
+		DeadTex[i].BindTexture( ss.str().c_str() );
+	}
+	for( int i = 0; i < NUMSLIDEFRAMES; ++i )
+	{
+		std::stringstream ss;
+		ss << "images/templerun/slide" << i << ".png";
+
+		SlideTex[i].BindTexture( ss.str().c_str() );
+	}
 
 	for( int i = 0; i < NUMJUMPFRAMES; ++i )
 	{
 		std::stringstream ss;
-		ss << "images/player/playerjump" << i << ".png";
+		ss << "images/templerun/jump" << i << ".png";
 
-		jumpTtex[i].BindTexture( ss.str().c_str() );
+		JumpTex[i].BindTexture( ss.str().c_str() );
 	}
 
 	for( int i = 0; i < NUMRUNFRAMES; ++i )
 	{
 		std::stringstream ss;
-		ss << "images/player/player" << i << ".png";
+		ss << "images/templerun/run" << i << ".png";
 
-		runTtex[i].BindTexture( ss.str().c_str() );
+		RunTex[i].BindTexture( ss.str().c_str() );
 	}
 
 	for( int i = 0; i < NUMFALLFRAMES; ++i )
 	{
 		std::stringstream ss;
-		ss << "images/player/playerfall" << i << ".png";
+		ss << "images/templerun/fall" << i << ".png";
 
-		fallTtex[i].BindTexture( ss.str().c_str() );
+		FallTex[i].BindTexture( ss.str().c_str() );
 	}
 }
 
 void Player::drawPlayer()
 {
-	glTranslatef( -0.5f, -1.0f, 0.0 );
-	glScaled( Player_size[0], Player_size[1], Player_size[2] );
+
+	float width = mCurrentTex->width * mSize;
+	float height = mCurrentTex->height * mSize;
+	float z = 0;
+	glTranslatef( -width / 2, 0, 0.0 );
 
 	glBegin( GL_QUADS );
 	glTexCoord2f( 0.0f, 1.0f );
-	glVertex3f( Vertices[0][0], Vertices[0][1], Vertices[0][2] );
+	glVertex3f( 0, 0, z );
 	glTexCoord2f( 1.0f, 1.0f );
-	glVertex3f( Vertices[1][0], Vertices[1][1], Vertices[1][2] );
+	glVertex3f( width, 0, z );
 	glTexCoord2f( 1.0f, 0.0f );
-	glVertex3f( Vertices[2][0], Vertices[2][1], Vertices[2][2] );
+	glVertex3f( width, height, z );
 	glTexCoord2f( 0.0f, 0.0f );
-	glVertex3f( Vertices[3][0], Vertices[3][1], Vertices[3][2] );
+	glVertex3f( 0, height, z );
 	glEnd();
 }
 
-const float GroundHeight = 0.0f;
-const float JumpHeight = 1.2f;
+
 
 void Player::Render()
 {
@@ -102,41 +139,68 @@ void Player::Render()
 	{
 
 	case Standing:
-		stndTtex[0].Bind();
-		break;
+	mCurrentTex = &StandTex[0];
+	break;
 
 	case Running:
-		if( T->GetTicks() > 15 )
-		{
-			mRunFrame++;
-			T->Reset();
-		}
-		mRunFrame = mRunFrame % NUMRUNFRAMES;
+	if( T->GetTicks() > 50 )
+	{
+		mRunFrame++;
+		T->Reset();
+	}
+	mRunFrame = mRunFrame % NUMRUNFRAMES;
 
-		runTtex[mRunFrame].Bind();
+	mCurrentTex = &RunTex[mRunFrame];
+	break;
 
-		break;
+	case Sliding:
+	if( T->GetTicks() > 80 )
+	{
+		mRunFrame++;
+		T->Reset();
+	}
+	mRunFrame %= NUMSLIDEFRAMES;
+	mCurrentTex = &SlideTex[mRunFrame];
+	break;
 
 
 	case Jumping:
 	{
-		float jumpstate = ( mY - GroundHeight ) / ( JumpHeight );
-		mJumpFrame = (int)( jumpstate * (float)NUMJUMPFRAMES ) % (NUMJUMPFRAMES + 1);
-		jumpTtex[mJumpFrame].Bind();
+		float jumpstate = ( mY - mGroundHeight ) / ( mJumpHeight );
+		mJumpFrame = (int)( jumpstate * (float)NUMJUMPFRAMES ) % ( NUMJUMPFRAMES + 1 );
+		mCurrentTex = &JumpTex[mJumpFrame];
 		break;
 	}
 	case Falling:
 	{
-		if( T->GetTicks() > 30 )
+		if( T->GetTicks() > 100 )
 		{
 			mFallFrame++;
 			T->Reset();
 		}
 		if( mFallFrame >= NUMFALLFRAMES ) mFallFrame = NUMFALLFRAMES - 1;
-		fallTtex[mFallFrame].Bind();
+		mCurrentTex = &FallTex[mFallFrame];
 		break;
 	}
+	case Dying:
+	{
+		if( T->GetTicks() > 200 )
+		{
+			mDieFrame++;
+			T->Reset();
+		}
+
+		if( mDieFrame >= NUMDEADFRAMES )
+		{
+			mDead = true;
+			mDieFrame = NUMDEADFRAMES - 1;
+		}
+
+		mCurrentTex = &DeadTex[mDieFrame];
 	}
+	}
+
+	mCurrentTex->Bind();
 
 	drawPlayer();
 	glPopMatrix();
@@ -149,12 +213,23 @@ void Player::StartMove( Direction d )
 		mState = Running;
 	}
 	mDirection = d;
+}
 
+void Player::Slide()
+{
+	if( mState == Running )
+		mState = Sliding;
+}
+
+void Player::StopSliding()
+{
+	if( mState == Sliding )
+		mState = Running;
 }
 
 void Player::Stop()
 {
-	if( mState == Running )
+	if( mState == Running || mState == Sliding )
 	{
 		mState = Standing;
 	}
@@ -164,36 +239,48 @@ void Player::Stop()
 void Player::Jump()
 {
 	if( mState == Running || mState == Standing )
+	{
 		mState = Jumping;
-    PlaySound("jump.wav", NULL, SND_ASYNC);
+		PlaySound( "jump.wav", NULL, SND_ASYNC );
+	}
 }
 
-void Player::Update()
+void Player::Die()
 {
+	mState = Dying;
+}
+
+void Player::Update( float dt, float height )
+{
+	if( mState == Dying )
+		return;
+
+	mGroundHeight = height * 0.24f;
+	mJumpHeight = mGroundHeight + height * 0.4f;
 
 	if( mDirection != None )
 	{
-		const float speed = 0.004f;
+		const float speed = 450;
 		if( mDirection == Right )
-			mX += speed;
-		else mX -= speed;
+			mX += speed * dt;
+		else mX -= speed * dt;
 	}
 
-	const float jumpspeed = 0.004f;
+	const float jumpspeed = 500;
 	if( mState == Jumping )
 	{
-		mY += jumpspeed;
-		if( mY > JumpHeight )
+		mY += jumpspeed * dt;
+		if( mY > mJumpHeight )
 		{
 			mState = Falling;
 		}
 	}
 	else if( mState == Falling )
 	{
-		mY -= jumpspeed;
-		if( mY < GroundHeight )
+		mY -= jumpspeed * dt;
+		if( mY < mGroundHeight )
 		{
-			mY = GroundHeight;
+			mY = mGroundHeight;
 			if( mDirection == None )
 				mState = Standing;
 			else mState = Running;
