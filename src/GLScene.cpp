@@ -659,7 +659,7 @@ void GLScene::DrawIngame()
 	std::stringstream ss;
 	ss << "Score:" << mScore;
 	std::string text = ss.str();
-	drawText( text.c_str(), text.length(), 0, ScreenHeight - 20, 1 );
+	drawText( text.c_str(), text.length(), 0, ScreenHeight - 30, 1 );
 	//Updating Score ends
 
 
@@ -669,7 +669,7 @@ void GLScene::DrawIngame()
 	ss2 << "LIVES:" << mLifes;
 	std::string text2 = ss2.str();
 	drawText( text2.c_str(), text2.length(),
-		ScreenWidth - 15 * text2.length(), ScreenHeight - 20, 1 );
+		ScreenWidth - 15 * text2.length(), ScreenHeight - 30, 1 );
 	//Updating Score ends
 
 
