@@ -33,6 +33,9 @@ TextureLoader Volcano;
 TextureLoader FireBall;
 TextureLoader Orange;
 TextureLoader Bullet;
+TextureLoader WaterMellon;
+TextureLoader Papaya;
+TextureLoader Cherry;
 
 void makedelay( int a )
 {
@@ -405,9 +408,12 @@ GLint GLScene::InitGL()									// All Setup For OpenGL Goes Here
 	MangoTex.BindTexture( "images/objects/apple.png" );
 	BombTex.BindTexture( "images/objects/bomb.png" );
 	FireBall.BindTexture( "images/objects/fireball.png" );
-	Volcano.BindTexture( "images/objects/volcano.png" );
+	Volcano.BindTexture( "images/objects/cac.png" );
 	Orange.BindTexture( "images/objects/orange.png" );
 	Bullet.BindTexture( "images/objects/bullet.png" );
+	WaterMellon.BindTexture( "images/objects/watermellon.png" );
+	Cherry.BindTexture( "images/objects/cherry.png" );
+	Papaya.BindTexture( "images/objects/papaya.png" );
 	ply->Init();
 	snds->soundinit();
 	snds->playMusic( "sounds/game_sound.wav" );
@@ -477,8 +483,8 @@ void GLScene::DrawIngame()
 {
 	Parallax* currentbg = GameBG;
 
-	if( mTime > 80000 ) currentbg = GameBG3;
-	else if( mTime > 40000 ) currentbg = GameBG2;
+	if( mTime > 8000 ) currentbg = GameBG3;
+	else if( mTime > 4000 ) currentbg = GameBG2;
 
 	currentbg->scrollTo( ply->mX / ScreenWidth, 0.0f ); // Set parallax position based on players.
 	currentbg->DrawSquare( ScreenWidth, ScreenHeight );
@@ -577,8 +583,14 @@ void GLScene::DrawIngame()
 				float what = Random();
 				if( what > 0.9f )
 					tex = &BombTex;
-				else if( what > 0.45f )
+				else if( what > 0.7f )
+					tex = &Cherry;
+                else if( what > 0.5f )
 					tex = &MangoTex;
+                else if( what > 0.3f )
+					tex = &Papaya;
+                else if( what > 0.15f )
+					tex = &WaterMellon;
 				else tex = &Orange;
 			}
 			else if( currentbg == GameBG2 ) // fireball, bomb.
@@ -591,6 +603,14 @@ void GLScene::DrawIngame()
 					tex = &FireBall;
 					size /= 2;
 				}
+				else if( what > 0.76f )
+					tex = &Cherry;
+                else if( what > 0.66f )
+					tex = &MangoTex;
+                else if( what > 0.56f )
+					tex = &Papaya;
+                else if( what > 0.36f )
+					tex = &WaterMellon;
 				else tex = &Orange;
 			}
 			else // fireball, bomb, volcano.
@@ -600,13 +620,21 @@ void GLScene::DrawIngame()
 					tex = &BombTex;
 				else if( what > 0.82f )
 					tex = &FireBall;
-				else if( what > 0.75f )
+                else if( what > 0.75f )
+					tex = &Cherry;
+                else if( what > 0.65f )
+					tex = &MangoTex;
+				else if( what > 0.55f )
 				{
 					tex = &Volcano;
 					speed = 0;
 					size *= 4.f;
 					posy = ScreenHeight * 0.25f;
 				}
+                else if( what > 0.25f )
+					tex = &Papaya;
+                else if( what > 0.15f )
+					tex = &WaterMellon;
 				else tex = &Orange;
 			}
 
