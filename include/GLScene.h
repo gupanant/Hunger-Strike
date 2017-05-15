@@ -111,7 +111,7 @@ private:
 	void DrawAskNameScreen();
 	void DrawHighScoreScreen();
 	void DrawCreditsScreen();
-
+    void OnMouseDown( WPARAM vkkey, double, double );
 	void OnKeyUp( WPARAM vkkey );
 
 };

@@ -123,6 +123,7 @@ int GLScene::WindowMsg( HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam )
 	case WM_LBUTTONDOWN:
 	{
 		KbMs->wParam = wParam;
+		OnMouseDown(wParam,LOWORD( lParam ), HIWORD( lParam ));
 		KbMs->MouseEventDown( Mdl, LOWORD( lParam ), HIWORD( lParam ) );
 		return 0;								// Jump Back
 	}
@@ -170,6 +171,16 @@ int GLScene::WindowMsg( HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam )
 	}
 
 	return 1;
+}
+
+void GLScene::OnMouseDown(WPARAM vkkey, double x, double y)
+{
+    if(mState== STATE_TITLE)
+    {
+        if((x>425 && x<836 && y > 589 && y < 677))
+        mState = STATE_MENU;
+    }
+
 }
 
 void GLScene::OnKeyUp( WPARAM vkkey )
@@ -301,9 +312,9 @@ GLint GLScene::InitGL()									// All Setup For OpenGL Goes Here
 	glHint( GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST );	// Really Nice Perspective Calculations
 
 	GLLight Light( GL_LIGHT0 );
-	GameBG->Init( "images/levels/bg.jpg" );
-	GameBG2->Init( "images/levels/p2.png" );
-	GameBG3->Init( "images/levels/p3.png" );
+	GameBG->Init( "images/levels/level222.png" );
+	GameBG2->Init( "images/levels/level222.png" );
+	GameBG3->Init( "images/levels/level444.png" );
 	GameOverScreen->Init( "images/screens/screen_gameover.jpg" );
 	TitleScreen->Init( "images/screens/screen_title.png" );
 	ExitScreen->Init( "images/screens/screen_exit.png" );

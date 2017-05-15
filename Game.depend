@@ -1711,7 +1711,7 @@
 1491273686 source:c:\users\anant\desktop\291t\final8\src\timer.cpp
 	"Timer.h"
 
-1494632889 source:c:\users\anant\desktop\291t\final10\main.cpp
+1494823307 source:c:\users\anant\desktop\291t\final10\main.cpp
 	<windows.h>
 	"GLScene.h"
 	<stdlib.h>
@@ -1719,7 +1719,7 @@
 	"Inputs.h"
 	<windows.h>
 
-1494811063 c:\users\anant\desktop\291t\final10\include\glscene.h
+1494824076 c:\users\anant\desktop\291t\final10\include\glscene.h
 	<windows.h>
 	<string.h>
 	<GLUT/glut.h>
@@ -1839,7 +1839,7 @@
 1491273686 source:c:\users\anant\desktop\291t\final10\src\timer.cpp
 	"Timer.h"
 
-1494819007 source:c:\users\anant\desktop\291t\final10\src\glscene.cpp
+1494824420 source:c:\users\anant\desktop\291t\final10\src\glscene.cpp
 	"GLScene.h"
 	"GLLight.h"
 	"Inputs.h"
