@@ -193,7 +193,7 @@ void GLScene::OnKeyUp( WPARAM vkkey )
 	}
 	else if( mState == STATE_MENU )
 	{
-		if( vkkey == 'N' )
+		if( vkkey == 'P' )
 		{
 			ResetGameState();
 			mState = STATE_ASKNAME;
@@ -247,6 +247,7 @@ void GLScene::OnKeyUp( WPARAM vkkey )
 		{
 			mState = mPreviousState;
 		}
+
 	}
 	else if( mState == STATE_GAMEOVER )
 	{
