@@ -241,7 +241,7 @@ void Player::Jump()
 	if( mState == Running || mState == Standing )
 	{
 		mState = Jumping;
-		PlaySound( "jump.wav", NULL, SND_ASYNC );
+		PlaySound( "sounds/jump.wav", NULL, SND_ASYNC );
 	}
 }
 

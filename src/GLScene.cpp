@@ -58,13 +58,13 @@ void drawText( const char *text, int length, int x, int y, int colors )
     }
     else if (colors==2)
     {
-        glColor3f(1.0f, 1.0f, 1.0f);
+        glColor3f(1.0f, 1.0f, 0.0f);
     }
 
 	glRasterPos2i( x, y ); // raster position in 2D
 	for( int i = 0; i < length; i++ )
 	{
-		glutBitmapCharacter( GLUT_BITMAP_HELVETICA_18, (int)text[i] ); // generation of characters in our text with 9 by 15 GLU font
+		glutBitmapCharacter( GLUT_BITMAP_TIMES_ROMAN_24, (int)text[i] ); // generation of characters in our text with 9 by 15 GLU font
 	}
 	glPopMatrix(); // get MODELVIEW matrix value from stack
 	glEnable(GL_LIGHTING);
@@ -193,9 +193,9 @@ void GLScene::OnMouseDown(WPARAM vkkey, double x, double y)
 
     xn = (x - (sw/2)) / cr;
     yn = (y - (sh/2)) / cr;
-    cout<<"next"<<endl;
-    cout<<"xn: "<<xn<<endl;
-    cout<<"yn: "<<yn<<endl;
+    cout<<"xn :"<<xn<<endl;
+    cout<<"yn :"<<yn<<endl<<endl;
+
     if(mState== STATE_TITLE)
     {
 
@@ -229,19 +229,34 @@ void GLScene::OnMouseDown(WPARAM vkkey, double x, double y)
     }
     else if(mState == STATE_HELP )
     {
+        if(xn > -4.07812 && xn < -2.48625 && yn > -2.12625 && yn < -1.60875){
+            mState = STATE_MENU;
+        }
 
     }
     else if(mState == STATE_CREDITS)
     {
-
+         if(xn > -4.07812 && xn < -2.48625 && yn > -2.12625 && yn < -1.60875){
+            mState = STATE_MENU;
+        }
     }
     else if(mState == STATE_EXIT)
     {
+        if(xn > -1.215 && xn < 0.63 && yn > -0.579375 && yn < -0.140625)
+        {
+            mRunning = false;
+        }
+        else if(xn > -1.18125 && xn < 0.174375 && yn > 0.4725 && yn < 0.95625)
+        {
+            mState = mPreviousState;
+        }
 
     }
     else if(mState == STATE_HIGHSCORE)
     {
-
+         if(xn > -4.07812 && xn < -2.48625 && yn > -2.12625 && yn < -1.60875){
+            mState = STATE_MENU;
+         }
     }
 
 }
@@ -280,7 +295,7 @@ void GLScene::OnKeyUp( WPARAM vkkey )
 		{
 			mState = STATE_CREDITS;
 		}
-		else if( vkkey == 'E' )
+		else if( vkkey == 'Q' )
 		{
 			mPreviousState = mState;
 			mState = STATE_EXIT;
@@ -395,7 +410,7 @@ GLint GLScene::InitGL()									// All Setup For OpenGL Goes Here
 	Bullet.BindTexture( "images/objects/bullet.png" );
 	ply->Init();
 	snds->soundinit();
-	snds->playMusic( "sounds/MF-W-90.XM" );
+	snds->playMusic( "sounds/game_sound.wav" );
 	return TRUE;										// Initialization Went OK
 }
 
@@ -519,6 +534,7 @@ void GLScene::DrawIngame()
 
 				if( c )
 				{
+				    snds->playSound( "sounds/explosion.wav" );
 					mPS.GenerateExplosion( i->mX, i->mY, 500 );
 					j = mColliders.erase( j );
 					collision = true;
@@ -625,7 +641,7 @@ void GLScene::DrawIngame()
 	ss2 << "LIVES:" << mLifes;
 	std::string text2 = ss2.str();
 	drawText( text2.c_str(), text2.length(),
-		ScreenWidth - 10 * text2.length(), ScreenHeight - 20, 1 );
+		ScreenWidth - 15 * text2.length(), ScreenHeight - 20, 1 );
 	//Updating Score ends
 
 
@@ -671,7 +687,8 @@ void GLScene::DrawIngame()
 			if( i->mTex == &BombTex || i->mTex == &FireBall || i->mTex == &Volcano )
 			{
 				mLifes--;
-				snds->playSound( "sounds/explosion.wav" );
+				//ply->Die();
+				snds->playSound( "sounds/life-lost.wav" );
 				mPS.GenerateExplosion( i->mX, i->mY, 500 );
 
 				if( mLifes <= 0 )
@@ -682,6 +699,7 @@ void GLScene::DrawIngame()
 			}
 			else
 			{
+			    snds->playSound( "sounds/collect.wav" );
 				mScore++;
 			}
 
@@ -816,6 +834,7 @@ void GLScene::AddHighScore( Score s )
 
 void GLScene::Shoot()
 {
+    snds->playSound( "sounds/shoot.wav" );
 	if( ply->IsDying() ) return;
 
 	mBullets.push_back( Collider( ply->mX,
