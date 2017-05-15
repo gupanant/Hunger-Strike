@@ -20,8 +20,10 @@ Parallax* GameOverScreen = new Parallax();
 Parallax* GameBG = new Parallax();
 Parallax* GameBG2 = new Parallax();
 Parallax* GameBG3 = new Parallax();
+Parallax* UserNameScreen = new Parallax();
 Parallax* HighScoreScreen = new Parallax();
-//Sprite *player = new Sprite();
+Parallax* CreditsScreen = new Parallax();
+
 Player *ply = new Player( 0.3f );
 sound *snds = new sound();
 
@@ -172,7 +174,12 @@ int GLScene::WindowMsg( HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam )
 
 void GLScene::OnKeyUp( WPARAM vkkey )
 {
-	if( mState == STATE_INGAME )
+	if( vkkey == VK_ESCAPE )
+	{
+		mPreviousState = mState;
+		mState = STATE_EXIT;
+	}
+	else if( mState == STATE_INGAME )
 	{
 		if( vkkey == VK_SPACE )
 			Shoot();
@@ -195,8 +202,13 @@ void GLScene::OnKeyUp( WPARAM vkkey )
 		{
 			mState = STATE_HELP;
 		}
+		else if( vkkey == 'C' )
+		{
+			mState = STATE_CREDITS;
+		}
 		else if( vkkey == 'E' )
 		{
+			mPreviousState = mState;
 			mState = STATE_EXIT;
 		}
 		else if( vkkey == 'S' )
@@ -205,6 +217,13 @@ void GLScene::OnKeyUp( WPARAM vkkey )
 		}
 	}
 	else if( mState == STATE_HIGHSCORE )
+	{
+		if( vkkey == VK_RETURN || vkkey == 'B' )
+		{
+			mState = STATE_MENU;
+		}
+	}
+    else if( mState == STATE_CREDITS )
 	{
 		if( vkkey == VK_RETURN || vkkey == 'B' )
 		{
@@ -226,7 +245,7 @@ void GLScene::OnKeyUp( WPARAM vkkey )
 		}
 		else if( vkkey == 'N' )
 		{
-			mState = STATE_MENU;
+			mState = mPreviousState;
 		}
 	}
 	else if( mState == STATE_GAMEOVER )
@@ -281,22 +300,24 @@ GLint GLScene::InitGL()									// All Setup For OpenGL Goes Here
 	glHint( GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST );	// Really Nice Perspective Calculations
 
 	GLLight Light( GL_LIGHT0 );
-	GameBG->Init( "images/m.png" );
-	GameBG2->Init( "images/p2.png" );
-	GameBG3->Init( "images/p3.png" );
-	GameOverScreen->Init( "images/screen_gameover.png" );
-	TitleScreen->Init( "images/screen_title.png" );
-	ExitScreen->Init( "images/screen_exit.png" );
-	HelpScreen->Init( "images/screen_help.png" );
-	MenuScreen->Init( "images/screen_menu.png" );
-	//HighScoresScreen->Init( "images/screen_highscore.png" );
+	GameBG->Init( "images/levels/bg.jpg" );
+	GameBG2->Init( "images/levels/p2.png" );
+	GameBG3->Init( "images/levels/p3.png" );
+	GameOverScreen->Init( "images/screens/screen_gameover.jpg" );
+	TitleScreen->Init( "images/screens/screen_title.png" );
+	ExitScreen->Init( "images/screens/screen_exit.png" );
+	HelpScreen->Init( "images/screens/screen_help.png" );
+	MenuScreen->Init( "images/screens/screen_menu.png" );
+	UserNameScreen->Init("images/screens/screen_name.jpg");
+	HighScoreScreen->Init( "images/screens/screen_highscore.png" );
+	CreditsScreen->Init("images/screens/screen_credits.png");
 
-	MangoTex.BindTexture( "images/apple.png" );
-	BombTex.BindTexture( "images/bomb.png" );
-	FireBall.BindTexture( "images/fireball.png" );
-	Volcano.BindTexture( "images/volcano.png" );
-	Orange.BindTexture( "images/orange.png" );
-	Bullet.BindTexture( "images/bullet.png" );
+	MangoTex.BindTexture( "images/objects/apple.png" );
+	BombTex.BindTexture( "images/objects/bomb.png" );
+	FireBall.BindTexture( "images/objects/fireball.png" );
+	Volcano.BindTexture( "images/objects/volcano.png" );
+	Orange.BindTexture( "images/objects/orange.png" );
+	Bullet.BindTexture( "images/objects/bullet.png" );
 	ply->Init();
 	snds->soundinit();
 	snds->playMusic( "sounds/MF-W-90.XM" );
@@ -316,6 +337,10 @@ GLint GLScene::DrawGLScene()							// Here's Where We Do All The Drawing
 	else if( mState == STATE_TITLE )
 	{
 		DrawTitleScreen();
+	}
+	else if( mState == STATE_CREDITS )
+	{
+		DrawCreditsScreen();
 	}
 	else if( mState == STATE_MENU )
 	{
@@ -607,6 +632,11 @@ void GLScene::DrawTitleScreen()
 	TitleScreen->DrawSquare( ScreenWidth, ScreenHeight );
 }
 
+void GLScene::DrawCreditsScreen()
+{
+	CreditsScreen->DrawSquare( ScreenWidth, ScreenHeight );
+}
+
 void GLScene::DrawMenuScreen()
 {
 	MenuScreen->DrawSquare( ScreenWidth, ScreenHeight );
@@ -629,15 +659,16 @@ void GLScene::DrawExitScreen()
 
 void GLScene::DrawAskNameScreen()
 {
+    UserNameScreen->DrawSquare( ScreenWidth, ScreenHeight );
 	std::stringstream name;
-	name << "Please Enter your name: " << mName;
+	name << mName;
 	std::string str = name.str();
-	drawText( str.c_str(), str.length(), (int)ScreenWidth / 4, (int)ScreenHeight / 2 );
+	drawText( str.c_str(), str.length(), (int)((ScreenWidth / 3) + 20), (int)ScreenHeight / 2 );
 }
 
 void GLScene::DrawHighScoreScreen()
 {
-	//HighScoreScreen->DrawSquare( ScreenWidth, ScreenHeight );
+	HighScoreScreen->DrawSquare( ScreenWidth, ScreenHeight );
 	int n = mHighScores.size();
 	if( n > 15 ) n = 15;
 	for( size_t i = 0; i < n; ++i )

@@ -37,7 +37,8 @@ enum States
 	STATE_GAMEOVER,
 	STATE_EXIT,
 	STATE_ASKNAME,
-	STATE_HIGHSCORE
+	STATE_HIGHSCORE,
+	STATE_CREDITS
 };
 using namespace std;
 class GLScene
@@ -55,6 +56,7 @@ public:
 		WPARAM,		// Additional Message Information
 		LPARAM );
 
+	int mPreviousState;
 	int mState;
 	std::string mName;
 
@@ -108,6 +110,7 @@ private:
 	void DrawExitScreen();
 	void DrawAskNameScreen();
 	void DrawHighScoreScreen();
+	void DrawCreditsScreen();
 
 	void OnKeyUp( WPARAM vkkey );
 

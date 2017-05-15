@@ -1559,3 +1559,295 @@
 	<windows.h>
 	<mmsystem.h>
 
+1494396723 source:c:\users\anant\desktop\291t\final7\src\glscene.cpp
+	"GLScene.h"
+	"GLLight.h"
+	"Inputs.h"
+	"Model.h"
+	"Parallax.h"
+	"Sprite.h"
+	"Player.h"
+	<string>
+	<sstream>
+	<sound.h>
+
+1493839348 source:c:\users\anant\desktop\291t\final8\main.cpp
+	<windows.h>
+	"GLScene.h"
+	<stdlib.h>
+	<iostream>
+	"Inputs.h"
+	<windows.h>
+
+1494391396 c:\users\anant\desktop\291t\final8\include\glscene.h
+	<windows.h>
+	<string.h>
+	<GLUT/glut.h>
+	<GL/glut.h>
+	<time.h>
+	<gl/gl.h>
+	<gl/glu.h>
+	<iostream>
+	<vector>
+	<fstream>
+	<algorithm>
+	<sstream>
+	<string>
+	<iomanip>
+	"collider.h"
+	"particle.h"
+
+1494036641 c:\users\anant\desktop\291t\final8\include\collider.h
+	<string>
+	"TextureLoader.h"
+
+1493857327 c:\users\anant\desktop\291t\final8\include\textureloader.h
+	<Windows.h>
+	<SOIL.h>
+	<gl/gl.h>
+
+1494195984 c:\users\anant\desktop\291t\final8\include\particle.h
+	<windows.h>
+	<gl/gl.h>
+	<math.h>
+	<stdlib.h>
+	<vector>
+
+1491480562 c:\users\anant\desktop\291t\final8\include\inputs.h
+	<windows.h>
+	<iostream>
+	"Model.h"
+	"Parallax.h"
+	"Player.h"
+
+1494391417 c:\users\anant\desktop\291t\final8\include\model.h
+	<windows.h>
+	<string.h>
+	<GLUT/glut.h>
+	<GL/glut.h>
+	<gl/gl.h>
+	<gl/glu.h>
+	<iostream>
+
+1493858283 c:\users\anant\desktop\291t\final8\include\parallax.h
+	<windows.h>
+	<gl/gl.h>
+	<string.h>
+	<iostream>
+	"TextureLoader.h"
+
+1494376095 c:\users\anant\desktop\291t\final8\include\player.h
+	<sstream>
+	"TextureLoader.h"
+
+1494375046 source:c:\users\anant\desktop\291t\final8\src\collider.cpp
+	"collider.h"
+
+1491273684 source:c:\users\anant\desktop\291t\final8\src\gllight.cpp
+	"GLLight.h"
+
+1491273685 c:\users\anant\desktop\291t\final8\include\gllight.h
+	"GLScene.h"
+
+1494416973 source:c:\users\anant\desktop\291t\final8\src\glscene.cpp
+	"GLScene.h"
+	"GLLight.h"
+	"Inputs.h"
+	"Model.h"
+	"Parallax.h"
+	"Sprite.h"
+	"Player.h"
+	<string>
+	<sstream>
+	<sound.h>
+
+1491273686 c:\users\anant\desktop\291t\final8\include\sprite.h
+
+1494391441 c:\users\anant\desktop\291t\final8\include\sound.h
+	<SNDS/irrKlang.h>
+	<stdlib.h>
+	<iostream>
+
+1494376126 source:c:\users\anant\desktop\291t\final8\src\inputs.cpp
+	"Inputs.h"
+
+1493857327 source:c:\users\anant\desktop\291t\final8\src\model.cpp
+	"Model.h"
+	"TextureLoader.h"
+
+1494009994 source:c:\users\anant\desktop\291t\final8\src\parallax.cpp
+	"Parallax.h"
+	"TextureLoader.h"
+
+1494197065 source:c:\users\anant\desktop\291t\final8\src\particle.cpp
+	"particle.h"
+
+1494379752 source:c:\users\anant\desktop\291t\final8\src\player.cpp
+	"Player.h"
+	"Timer.h"
+	<windows.h>
+	<mmsystem.h>
+
+1491273686 c:\users\anant\desktop\291t\final8\include\timer.h
+	<time.h>
+
+1493842181 source:c:\users\anant\desktop\291t\final8\src\sound.cpp
+	"sound.h"
+
+1493854503 source:c:\users\anant\desktop\291t\final8\src\sprite.cpp
+	"Sprite.h"
+	"TextureLoader.h"
+	<windows.h>
+	<gl/gl.h>
+	<string>
+	<GLUT/glut.h>
+	<glut.h>
+	<iostream>
+	<string>
+
+1494023186 source:c:\users\anant\desktop\291t\final8\src\textureloader.cpp
+	"TextureLoader.h"
+
+1491273686 source:c:\users\anant\desktop\291t\final8\src\timer.cpp
+	"Timer.h"
+
+1494632889 source:c:\users\anant\desktop\291t\final10\main.cpp
+	<windows.h>
+	"GLScene.h"
+	<stdlib.h>
+	<iostream>
+	"Inputs.h"
+	<windows.h>
+
+1494811063 c:\users\anant\desktop\291t\final10\include\glscene.h
+	<windows.h>
+	<string.h>
+	<GLUT/glut.h>
+	<GL/glut.h>
+	<time.h>
+	<gl/gl.h>
+	<gl/glu.h>
+	<iostream>
+	<vector>
+	<fstream>
+	<algorithm>
+	<sstream>
+	<string>
+	<iomanip>
+	"collider.h"
+	"particle.h"
+
+1494036641 c:\users\anant\desktop\291t\final10\include\collider.h
+	<string>
+	"TextureLoader.h"
+
+1493857327 c:\users\anant\desktop\291t\final10\include\textureloader.h
+	<Windows.h>
+	<SOIL.h>
+	<gl/gl.h>
+
+1494195984 c:\users\anant\desktop\291t\final10\include\particle.h
+	<windows.h>
+	<gl/gl.h>
+	<math.h>
+	<stdlib.h>
+	<vector>
+
+1491480562 c:\users\anant\desktop\291t\final10\include\inputs.h
+	<windows.h>
+	<iostream>
+	"Model.h"
+	"Parallax.h"
+	"Player.h"
+
+1494735874 c:\users\anant\desktop\291t\final10\include\model.h
+	<windows.h>
+	<string.h>
+	<GLUT/glut.h>
+	<GL/glut.h>
+	<gl/gl.h>
+	<gl/glu.h>
+	<iostream>
+
+1493858283 c:\users\anant\desktop\291t\final10\include\parallax.h
+	<windows.h>
+	<gl/gl.h>
+	<string.h>
+	<iostream>
+	"TextureLoader.h"
+
+1494376095 c:\users\anant\desktop\291t\final10\include\player.h
+	<sstream>
+	"TextureLoader.h"
+
+1494375046 source:c:\users\anant\desktop\291t\final10\src\collider.cpp
+	"collider.h"
+
+1491273684 source:c:\users\anant\desktop\291t\final10\src\gllight.cpp
+	"GLLight.h"
+
+1491273685 c:\users\anant\desktop\291t\final10\include\gllight.h
+	"GLScene.h"
+
+1494376126 source:c:\users\anant\desktop\291t\final10\src\inputs.cpp
+	"Inputs.h"
+
+1493857327 source:c:\users\anant\desktop\291t\final10\src\model.cpp
+	"Model.h"
+	"TextureLoader.h"
+
+1494009994 source:c:\users\anant\desktop\291t\final10\src\parallax.cpp
+	"Parallax.h"
+	"TextureLoader.h"
+
+1494197065 source:c:\users\anant\desktop\291t\final10\src\particle.cpp
+	"particle.h"
+
+1494379752 source:c:\users\anant\desktop\291t\final10\src\player.cpp
+	"Player.h"
+	"Timer.h"
+	<windows.h>
+	<mmsystem.h>
+
+1491273686 c:\users\anant\desktop\291t\final10\include\timer.h
+	<time.h>
+
+1493842181 source:c:\users\anant\desktop\291t\final10\src\sound.cpp
+	"sound.h"
+
+1494735907 c:\users\anant\desktop\291t\final10\include\sound.h
+	<SNDS/irrKlang.h>
+	<stdlib.h>
+	<iostream>
+
+1494817968 source:c:\users\anant\desktop\291t\final10\src\sprite.cpp
+	"Sprite.h"
+	"TextureLoader.h"
+	<windows.h>
+	<gl/gl.h>
+	<string>
+	<GLUT/glut.h>
+	<GL/glut.h>
+	<iostream>
+	<string>
+
+1491273686 c:\users\anant\desktop\291t\final10\include\sprite.h
+
+1494023186 source:c:\users\anant\desktop\291t\final10\src\textureloader.cpp
+	"TextureLoader.h"
+
+1491273686 source:c:\users\anant\desktop\291t\final10\src\timer.cpp
+	"Timer.h"
+
+1494816922 source:c:\users\anant\desktop\291t\final10\src\glscene.cpp
+	"GLScene.h"
+	"GLLight.h"
+	"Inputs.h"
+	"Model.h"
+	"Parallax.h"
+	"Sprite.h"
+	"Player.h"
+	<string>
+	<sstream>
+	<sound.h>
+
