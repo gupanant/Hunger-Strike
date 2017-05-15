@@ -46,17 +46,28 @@ float Random()
 }
 
 /*Draw Text */
-void drawText( const char *text, int length, int x, int y )
+void drawText( const char *text, int length, int x, int y, int colors )
 {
+    glDisable(GL_LIGHTING);
 	glMatrixMode( GL_MODELVIEW ); // change current matrix to MODELVIEW matrix again
 	glPushMatrix(); // push current state of MODELVIEW matrix to stack
 	glLoadIdentity(); // reset it again. (may not be required, but it my convention)
+    if (colors == 1)
+    {
+        glColor3f(0.0f, 0.0f, 0.0f);
+    }
+    else if (colors==2)
+    {
+        glColor3f(1.0f, 1.0f, 1.0f);
+    }
+
 	glRasterPos2i( x, y ); // raster position in 2D
 	for( int i = 0; i < length; i++ )
 	{
 		glutBitmapCharacter( GLUT_BITMAP_HELVETICA_18, (int)text[i] ); // generation of characters in our text with 9 by 15 GLU font
 	}
 	glPopMatrix(); // get MODELVIEW matrix value from stack
+	glEnable(GL_LIGHTING);
 }
 //Draw Text Ends
 
@@ -364,9 +375,9 @@ GLint GLScene::InitGL()									// All Setup For OpenGL Goes Here
 	glHint( GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST );	// Really Nice Perspective Calculations
 
 	GLLight Light( GL_LIGHT0 );
-	GameBG->Init( "images/levels/level222.png" );
-	GameBG2->Init( "images/levels/level222.png" );
-	GameBG3->Init( "images/levels/level444.png" );
+	GameBG->Init( "images/levels/level1.png" );
+	GameBG2->Init( "images/levels/level2.png" );
+	GameBG3->Init( "images/levels/level3.png" );
 	GameOverScreen->Init( "images/screens/screen_gameover.jpg" );
 	TitleScreen->Init( "images/screens/screen_title.png" );
 	ExitScreen->Init( "images/screens/screen_exit.png" );
@@ -595,16 +606,16 @@ void GLScene::DrawIngame()
 	}
 
 
-	// some bug causes first drawtext to draw nothing.
-	// so we do a dummy call to fix this.
-	drawText( "a", 1, 0, 0 );
+	//some bug causes first drawtext to draw nothing.
+    //so we do a dummy call to fix this.
+	drawText( " ", 1, 0, 0, 2 );
 
 
 	//Updating Score
 	std::stringstream ss;
 	ss << "Score:" << mScore;
 	std::string text = ss.str();
-	drawText( text.c_str(), text.length(), 0, ScreenHeight - 20 );
+	drawText( text.c_str(), text.length(), 0, ScreenHeight - 20, 1 );
 	//Updating Score ends
 
 
@@ -614,7 +625,7 @@ void GLScene::DrawIngame()
 	ss2 << "LIVES:" << mLifes;
 	std::string text2 = ss2.str();
 	drawText( text2.c_str(), text2.length(),
-		ScreenWidth - 10 * text2.length(), ScreenHeight - 20 );
+		ScreenWidth - 10 * text2.length(), ScreenHeight - 20, 1 );
 	//Updating Score ends
 
 
@@ -727,7 +738,7 @@ void GLScene::DrawAskNameScreen()
 	std::stringstream name;
 	name << mName;
 	std::string str = name.str();
-	drawText( str.c_str(), str.length(), (int)((ScreenWidth / 3) + 20), (int)ScreenHeight / 2 );
+	drawText( str.c_str(), str.length(), (int)((ScreenWidth / 3) + 20), (int)ScreenHeight / 2, 1 );
 }
 
 void GLScene::DrawHighScoreScreen()
@@ -744,7 +755,7 @@ void GLScene::DrawHighScoreScreen()
 		std::string scoretext = ss.str();
 		drawText( scoretext.c_str(), scoretext.length(),
 			(int)ScreenWidth * 0.4f,
-			(int)( ScreenHeight * 0.75f ) - i * 30 );
+			(int)( ScreenHeight * 0.65f ) - i * 25, 2 );
 	}
 }
 
