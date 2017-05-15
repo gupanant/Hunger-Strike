@@ -175,10 +175,62 @@ int GLScene::WindowMsg( HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam )
 
 void GLScene::OnMouseDown(WPARAM vkkey, double x, double y)
 {
+    float sw = ScreenWidth;
+    float sh = ScreenHeight;
+    float cr = (sw/sh) * 100;
+    float xn, yn;
+
+    xn = (x - (sw/2)) / cr;
+    yn = (y - (sh/2)) / cr;
+    cout<<"next"<<endl;
+    cout<<"xn: "<<xn<<endl;
+    cout<<"yn: "<<yn<<endl;
     if(mState== STATE_TITLE)
     {
-        if((x>425 && x<836 && y > 589 && y < 677))
-        mState = STATE_MENU;
+
+        if(xn > -1.23474 && xn < 1.24567 && yn > 1.48333 && yn < 2.01874)
+            mState = STATE_MENU;
+    }
+    else if(mState == STATE_MENU)
+    {
+        if(xn>-3.49 && xn < -2.31 && yn > -1.51 && yn < -0.298)
+        {
+            ResetGameState();
+			mState = STATE_ASKNAME;
+        }
+        else if(xn > -1.97438 && xn < -0.86625 && yn > -1.35 && yn < -0.11)
+        {
+            mState = STATE_HIGHSCORE;
+        }
+        else if(xn > -0.35437 && xn < 0.65251 && yn > -1.35 && yn < -0.11)
+        {
+            mState = STATE_CREDITS;
+        }
+        else if(xn > 1.09125 && xn < 2.115 && yn > -1.35 && yn < -0.11)
+        {
+            mState = STATE_HELP;
+        }
+        else if(xn > 2.52 && xn < 3.6225 && yn > -1.35 && yn < -0.11)
+        {
+            mPreviousState = mState;
+            mState = STATE_EXIT;
+        }
+    }
+    else if(mState == STATE_HELP )
+    {
+
+    }
+    else if(mState == STATE_CREDITS)
+    {
+
+    }
+    else if(mState == STATE_EXIT)
+    {
+
+    }
+    else if(mState == STATE_HIGHSCORE)
+    {
+
     }
 
 }
