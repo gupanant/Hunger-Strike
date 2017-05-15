@@ -191,13 +191,12 @@ void GLScene::OnMouseDown(WPARAM vkkey, double x, double y)
 {
     float sw = ScreenWidth;
     float sh = ScreenHeight;
-    float cr = (sw/sh) * 100;
-    float xn, yn;
 
-    xn = (x - (sw/2)) / cr;
-    yn = (y - (sh/2)) / cr;
-    cout<<"xn :"<<xn<<endl;
-    cout<<"yn :"<<yn<<endl<<endl;
+    float xn,yn;
+    cout<<"x :"<<x<<endl;
+    cout<<"y :"<<y<<endl;
+
+    cout<<"resol :"<<sw<<" * "<<sh<<endl;
 
     if(mState== STATE_TITLE)
     {
@@ -266,7 +265,7 @@ void GLScene::OnMouseDown(WPARAM vkkey, double x, double y)
 
 void GLScene::OnKeyUp( WPARAM vkkey )
 {
-	if( vkkey == VK_ESCAPE )
+	if( mState != STATE_EXIT && vkkey == VK_ESCAPE )
 	{
 		mPreviousState = mState;
 		mState = STATE_EXIT;
@@ -483,8 +482,8 @@ void GLScene::DrawIngame()
 {
 	Parallax* currentbg = GameBG;
 
-	if( mTime > 8000 ) currentbg = GameBG3;
-	else if( mTime > 4000 ) currentbg = GameBG2;
+	if( mTime > 80000 ) currentbg = GameBG3;
+	else if( mTime > 40000 ) currentbg = GameBG2;
 
 	currentbg->scrollTo( ply->mX / ScreenWidth, 0.0f ); // Set parallax position based on players.
 	currentbg->DrawSquare( ScreenWidth, ScreenHeight );
@@ -498,19 +497,19 @@ void GLScene::DrawIngame()
 	ticks += elapsed;
 	lastclock = now;
 	mTime += elapsed;
+
 	while( ticks > 16 )
 	{
+      if (!ply -> IsDying()) {
 		// Update player position based on inputs.
 		ply->Update( 0.016, ScreenHeight );
 
 		// Move colliders and bullets.
-		for( std::vector< Collider >::iterator i = mColliders.begin();
-			i != mColliders.end(); ++i )
+		for( std::vector< Collider >::iterator i = mColliders.begin(); i != mColliders.end(); ++i )
 		{
 			i->Update( 0.016 );
 		}
-		for( std::vector< Collider >::iterator i = mBullets.begin();
-			i != mBullets.end(); )
+		for( std::vector< Collider >::iterator i = mBullets.begin();i != mBullets.end(); )
 		{
 			i->Update( 0.016 );
 
@@ -555,10 +554,6 @@ void GLScene::DrawIngame()
 			else i = mBullets.erase( i );
 
 		}
-
-		mPS.Update( 0.016, ScreenHeight * 0.245f );
-		mPS.GenerateRain( ply->mX - ScreenWidth * 0.8f, ScreenWidth * 1.6f, ScreenHeight );
-
 		while( ply->mX + ScreenWidth * 0.6f > mLastx )
 		{
 			//putting objects bomb and mango at random places
@@ -644,11 +639,11 @@ void GLScene::DrawIngame()
 			if( tex )
 				mColliders.push_back( Collider( posx, posy, size, speed, tex ) );
 		}
-
+      }
+        mPS.Update( 0.016, ScreenHeight * 0.245f );
+		mPS.GenerateRain( ply->mX - ScreenWidth * 0.8f, ScreenWidth * 1.6f, ScreenHeight );
 		ticks -= 16;
-
 	}
-
 
 	//some bug causes first drawtext to draw nothing.
     //so we do a dummy call to fix this.
@@ -714,15 +709,11 @@ void GLScene::DrawIngame()
 		{
 			if( i->mTex == &BombTex || i->mTex == &FireBall || i->mTex == &Volcano )
 			{
-				mLifes--;
+				ply-> Die();
+				//mLifes--;
 				//ply->Die();
 				snds->playSound( "sounds/life-lost.wav" );
 				mPS.GenerateExplosion( i->mX, i->mY, 500 );
-
-				if( mLifes <= 0 )
-				{
-					ply->Die();
-				}
 
 			}
 			else
@@ -743,7 +734,12 @@ void GLScene::DrawIngame()
 
 	if( ply->IsDead() )
 	{
-		mState = STATE_GAMEOVER;
+	    mLifes--;
+	    ply->Revive();
+	    ticks=0;
+	}
+	if (mLifes ==0){
+        mState = STATE_GAMEOVER;
 	}
 
 }

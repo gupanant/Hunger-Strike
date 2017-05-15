@@ -37,6 +37,7 @@ public:
 	void Slide();
 	void StopSliding();
 	void Die();
+	void Revive();
 
 	void Render();
 	void Update( float dt, float screenheight );

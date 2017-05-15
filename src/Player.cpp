@@ -226,6 +226,12 @@ void Player::StopSliding()
 	if( mState == Sliding )
 		mState = Running;
 }
+void Player::Revive(){
+    mDead = false;
+    mState = Standing;
+    mDieFrame = 0;
+    mY = mGroundHeight;
+}
 
 void Player::Stop()
 {
